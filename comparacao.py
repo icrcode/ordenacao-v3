@@ -1,5 +1,22 @@
 import subprocess
 import time
+import random
+
+def gerar_aleatorio(quantidade):
+    return [random.randint(0, 1000) for _ in range(quantidade)]
+
+def gerar_meio_ordenado(quantidade):
+    lista = [i for i in range(quantidade)]
+
+    for _ in range(quantidade // 5):
+        idx1, idx2 = random.randint(0, quantidade - 1), random.randint(0, quantidade - 1)
+        lista[idx1], lista[idx2] = lista[idx2], lista[idx1]
+    return lista
+
+def salvar_dados(dados):
+    with open("valores.txt", "w") as arquivo:
+        for valor in dados:
+            arquivo.write(f"{valor}\n")
 
 def executar_ordenacao(nome_script):
     inicio = time.time()
@@ -17,9 +34,23 @@ def executar_ordenacao(nome_script):
     return tempo_execucao, etapas
 
 def main():
+    print("escolha o tipo de dados:")
+    print("1 - completamente aleatórios")
+    print("2 - meio ordenados")
+    escolha = input("digite o número da opção desejada: ")
 
-    print("gerando valores aleatórios...")
-    subprocess.run(["python", "gerador_aleatorio.py"])
+    quantidade = 100  
+    if escolha == "1":
+        print("gerando dados completamente aleatórios...")
+        dados = gerar_aleatorio(quantidade)
+    elif escolha == "2":
+        print("gerando dados meio ordenados...")
+        dados = gerar_meio_ordenado(quantidade)
+    else:
+        print("opção inválida. gerando dados completamente aleatórios por padrão.")
+        dados = gerar_aleatorio(quantidade)
+
+    salvar_dados(dados)
 
     scripts = [
         "bubble_sort.py",
