@@ -74,8 +74,9 @@ def main():
     for script, tempo, etapas in resultados_ordenados_tempo:
         print(f"{script}: {tempo:.6f} segundos")
 
-    print("\nnúmero de etapas de todos os algoritmos:")
-    for script, tempo, etapas in resultados:
+    print("\nnúmero de etapas (do menor para o maior):")
+    resultados_ordenados_etapas = sorted(resultados, key=lambda x: x[2])
+    for script, tempo, etapas in resultados_ordenados_etapas:
         print(f"{script}: {etapas} etapas")
 
     menor_etapas = min(resultados, key=lambda x: x[2])
