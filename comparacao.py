@@ -2,6 +2,17 @@ import subprocess
 import time
 import random
 
+def escolher_quantidade():
+    while True:
+        try:
+            quantidade = int(input("digite a quantidade de valores a serem gerados: "))
+            if quantidade > 0:
+                return quantidade
+            else:
+                print("a quantidade deve ser maior que zero. tente novamente.")
+        except ValueError:
+            print("entrada inválida. digite um número inteiro.")
+
 def gerar_aleatorio(quantidade):
     return [random.randint(0, 1000) for _ in range(quantidade)]
 
@@ -34,12 +45,13 @@ def executar_ordenacao(nome_script):
     return tempo_execucao, etapas
 
 def main():
-    print("escolha o tipo de dados:")
+    quantidade = escolher_quantidade()
+
+    print("\nescolha como os dados devem estar de dados:")
     print("1 - completamente aleatórios")
     print("2 - meio ordenados")
     escolha = input("digite o número da opção desejada: ")
 
-    quantidade = 100  
     if escolha == "1":
         print("gerando dados completamente aleatórios...")
         dados = gerar_aleatorio(quantidade)
