@@ -23,13 +23,11 @@ def escrever_no_arquivo(valores, nome_arquivo="valores.txt"):
             arquivo.write(f"{valor}\n")
 
 if __name__ == "__main__":
-    # solicita ao usuário a quantidade de números a serem gerados
+
     quantidade = int(input("quantos números aleatórios deseja gerar? "))
     
-    # gera os números aleatórios
     valores = gerar_numeros_aleatorios(quantidade)
     
-    # escreve os números no arquivo
     escrever_no_arquivo(valores)
     
     print(f"{quantidade} números aleatórios foram gerados e salvos em 'extra/valores.txt'.")
